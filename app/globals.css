@@ -1,26 +1,638 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #1ba1ad 0%, #538ef4 100%);
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: background 0.3s ease;
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.main-info {
+  flex: 3;
+  min-width: 300px;
+  padding: 30px;
+}
+
+.social-info {
+  flex: 2;
+  min-width: 250px;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+
+.page-content {
+  padding: 30px;
+}
+
+.navbar {
+  background: linear-gradient(to right, #2566fccb, #051d4d);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.nav-brand {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+}
+
+.nav-item {
+  margin-left: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: inherit;
+}
+
+.nav-link:hover, 
+.nav-link:focus, 
+.nav-link.active {
+  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin-bottom: 4px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+header {
+  background: linear-gradient(to right, #2566fccb, #051d4d);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.greeting {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.profile-photo {
+  background: #4b6cb7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  margin: 0 auto;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10%;
+  transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+}
+
+.profile-img i {
+  font-size: 70px;
+  color: #4b6cb7;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #4b6cb7;
+  border-bottom: 2px solid #4b6cb7;
+  padding-bottom: 15px;
+}
+
+.info-section {
+  margin-bottom: 25px;
+}
+
+h2 {
+  color: #4b6cb7;
+  border-bottom: 2px solid #4b6cb7;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 12px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.info-icon {
+  width: 24px;
+  margin-right: 15px;
+  color: #4b6cb7;
+  flex-shrink: 0;
+}
+
+.social-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.social-card:hover, 
+.social-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.social-text {
+  flex: 1;
+}
+
+.social-username {
+  font-weight: 500;
+}
+
+.facebook-card .social-icon {
+  background: #3b5998;
+}
+
+.instagram-card .social-icon {
+  background: #e1306c;
+}
+
+.tiktok-card .social-icon {
+  background: #000000;
+}
+
+.sports-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.sports-section h2 {
+  margin-bottom: 20px;
+}
+
+.sports-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.sport-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sport-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sport-icon.basketball {
+  background: #ff6b6b;
+}
+
+.sport-icon.running {
+  background: #4ecdc4;
+}
+
+.sport-icon.cycling {
+  background: #45b7d1;
+}
+
+.sport-item p {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.skills-section {
+  margin-top: 20px;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skill-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #4b6cb7;
+}
+
+.skill-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b6cb7;
+}
+
+.skill-percentage {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.skill-progress-container {
+  height: 10px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.skill-progress-bar {
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(to right, #4b6cb7, #6a9eff);
+  transition: width 1s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.2) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.2) 75%,
+      transparent 75%,
+      transparent
+  );
+  z-index: 1;
+  background-size: 20px 20px;
+  animation: move 1s linear infinite;
+  overflow: hidden;
+}
+
+.skill-item:hover .skill-progress-bar {
+  transform: scaleY(1.2);
+  transform-origin: center;
+}
+
+.skill-item:hover .skill-name {
+  color: #3a559e;
+}
+
+.skill-item:hover .skill-icon {
+  transform: scale(1.2);
+}
+
+.page {
+  display: block;
+}
+
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.theme-switcher:hover, 
+.theme-switcher:focus {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(15deg);
+  outline: none;
+}
+
+.dark-theme {
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+}
+
+.dark-theme .container {
+  background: #333;
+  color: #f0f0f0;
+}
+
+.dark-theme .social-info {
+  background: #2a2a2a;
+}
+
+.dark-theme h2 {
+  color: #6a9eff;
+  border-bottom-color: #6a9eff;
+}
+
+.dark-theme .info-icon {
+  color: #6a9eff;
+}
+
+.dark-theme .social-card {
+  background: #444;
+  color: #f0f0f0;
+}
+
+.dark-theme .page-header {
+  color: #6a9eff;
+  border-bottom-color: #6a9eff;
+}
+
+.dark-theme .skill-name {
+  color: #6a9eff;
+}
+
+.dark-theme .skill-icon {
+  color: #6a9eff;
+}
+
+.dark-theme .skill-percentage {
+  color: #aaa;
+}
+
+.dark-theme .skill-progress-container {
+  background-color: #444;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+      opacity: 0;
+      transform: scale(0.8);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+@keyframes move {
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+      background-position: 20px 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      flex-direction: column;
+      background: linear-gradient(to right, #2566fccb, #051d4d);
+      width: 200px;
+      text-align: left;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      z-index: 1000;
+      border-bottom-left-radius: 10px;
+  }
+  
+  .nav-menu.active {
+      display: flex;
+  }
+  
+  .nav-item {
+      margin: 10px 0;
+  }
+  
+  .hamburger {
+      display: flex;
+  }
+  
+  .content {
+      flex-direction: column;
+  }
+  
+  .social-info, 
+  .main-info {
+      width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+      flex-direction: column;
+  }
+  
+  h1 {
+      font-size: 2rem;
+  }
+  
+  header {
+      padding: 25px 20px;
+  }
+  
+  .nav-menu {
+      position: fixed;
+      left: -100%;
+      top: 70px;
+      flex-direction: column;
+      background: linear-gradient(to right, #2566fccb, #051d4d);
+      width: 100%;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      padding: 20px 0;
+  }
+  
+  .nav-menu.active {
+      left: 0;
+  }
+  
+  .nav-item {
+      margin: 15px 0;
+  }
+  
+  .page-content {
+      padding: 20px;
+  }
+  
+  .sports-container {
+      justify-content: center;
+  }
+  
+  .skills-container {
+      gap: 15px;
+  }
+  
+  .skill-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+  }
+  
+  .skill-percentage {
+      align-self: flex-end;
+      margin-top: -24px;
+  }
 }
